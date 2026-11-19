@@ -106,7 +106,7 @@
    damageTarget(t,amount,missile=false,echo=false){
    if(t.hp<=0)return;
    if(t.kind==='boss'&&this.phase!=='duel'){if(this.noteTimer<=0){this.emit('toast',{text:'ЩИТ СИТХА ДЕРЖИТСЯ · уничтожай эскорт'});this.noteTimer=5;}this.emit('shield',{position:copy(t)});return;}
-    t.hp=Math.max(0,t.hp-amount);if(echo)t.lastEchoHit=true;this.hits+=missile||echo?0:1;this.emit('hit',{position:copy(t),boss:t.kind==='boss',echo});
+    t.hp=Math.max(0,t.hp-amount);t.lastEchoHit=echo;this.hits+=missile||echo?0:1;this.emit('hit',{position:copy(t),boss:t.kind==='boss',echo});
    if(t.hp===0){
     this.kills++;this.awardKill(t);this.emit('explosion',{position:copy(t),size:t.kind==='boss'?40:(t.variant==='bomber'?22:t.variant==='ace'?17:15)});
     if(t.kind==='boss'){this.end(true,'Корабль ситха уничтожен. Его маршрут заканчивается здесь.');}
